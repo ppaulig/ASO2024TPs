@@ -1,0 +1,50 @@
+Trabajo práctico N º 3: Procesos multi-hilados 
+
+tareas_SIN_hilos.py 
+
+ - ¿Qué se puede notar con respecto al tiempo de ejecución? ¿Es predecible? 
+Observando el programa “tareas_SIN_hilos.py” puedo notar, con respecto al tiempo de ejecución, que el código “time.perf_counter()” almacena el tiempo que se tardó en realizar determinada acción, y al final del código el programa muestra en pantalla la cantidad de segundos que se tardaron en completar todas las tareas. Cada ejecución daba distinto resultado decimal, pero la parte entera siempre se mantenía igual.  En base a esto podemos decir que los tiempos de ejecución si son predecibles, pero no exactos, cada ejecución puede tener un resultado mínimamente distinto, y si el tiempo no es fijo, va a depender de la velocidad de procesamiento de la máquina.  
+
+- Nombrar un proceso o función de la vida real que pueden ser considerados procesos de “máxima velocidad posible” que dependen casi exclusivamente de la velocidad de la máquina que los ejecuta (ej. Ordenar una lista) 
+Un proceso o función de la vida real que dependan de la velocidad de la maquina es utilizar el control remoto para realizar una acción en el televisor. Por ejemplo, si queremos cambiar de canal apretaremos un botón del control remoto, el cual enviará una señal al televisor. La velocidad en la que se ejecute la acción dependerá del tiempo en que el televisor capte y procese la señal emitida. 
+
+- Nombrar un proceso o función de la vida real que pueden ser considerados procesos de “velocidad de respuesta no dependiente de la velocidad de procesamiento” o que sea de naturaleza impredecible o externa (ej. Leer un archivo externo) 
+Un proceso o función de la vida real que pueden ser considerados procesos de velocidad de respuesta no dependiente de la velocidad de procesamiento es realizar una llamada telefónica. Esta acción no depende de la velocidad de procesamiento del dispositivo, sino de otros factores como la señal, la conexión a internet, el saldo del dispositivo, etc.  
+
+
+ tareas_CON_hilos.py 
+
+- ¿Qué se puede notar con respecto al tiempo de ejecución? ¿Se mejoró el tiempo de respuesta con respecto al mismo programa sin hilos? 
+Observando el programa “tareas_SIN_hilos.py” puedo notar, con respecto al tiempo de ejecución, lo mismo que note con el programa “tareas_SIN_hilos.py”, cada ejecución da distinto resultado decimal, pero la parte entera siempre se mantiene igual. Es decir, el tiempo de ejecución no es exacto, puede variar.           
+  El tiempo de respuesta mejoro con respecto al programa anterior, ya que el resultado aparece en pantalla un poco más rápido y no muestra el tiempo que se usó en realizar todas las tareas en total. 
+
+- ¿Completan las funciones su ejecución en el orden establecido? 
+Las funciones no completan en su ejecución el orden establecido. En el código tarea_1 se ejecuta primero que todas las restantes, pero cuando ejecutamos el programa se muestra el primer print de todas las funciones, luego lo que resta de tarea_2, lo que resta de tarea_1 y por último lo que resta de tarea_3. Es decir, se muestran desordenadas.  
+
+- Nombrar un escenario real donde el multi-hilado puede mejorar considerablemente el tiempo de respuesta de un sistema (ej. Carga de una página WEB en un navegador) 
+Un escenario real donde el multi-hilado podría mejorar el tiempo de respuesta de un sistema podría ser en la red social X, antes llamada Twitter.			   
+Por ejemplo, podría implementarse un hilo para manejar y procesar las interacciones que tiene o recibe el usuario, como likes, retweets, comentarios, mensajes, nuevos seguidores, etc. A su vez otro hilo puede encargarse de ir actualizando el inicio con los twits o retweets de las cuentas seguidas, los twits más recientes, los más populares, etc. Por último, otro hilo podría mostrar cada cierto tiempo o cantidad de tweets las publicidades y propagandas de distintas marcas que trabajan o colaboran con la red social.  
+
+
+sumador-restador_CON_race.py 
+
+- ¿Qué se puede notar con respecto al tiempo de ejecución? 
+Con respecto al tiempo de ejecución del programa “sumador-restador_CON_race.py”, se puede notar que es muy rápido, casi instantáneo, e igual que el tiempo de ejecución de “sumador-restador.py”.  
+
+- ¿Qué sucede con el valor final del acumulador? 
+Con el valor final del acumulador sucede que ya no es siempre 0, sino que cada ejecución da un valor distinto. Por ejemplo: 0, -4890, - 1440, 0, etc. 
+
+- ¿Por qué sucede esto? 
+El valor final del acumulador ya no es fijo, sino que varía en cada ejecución. Esto sucede porque los hilos acceden a un recurso compartido, la variable acumulador. Compartir este recurso hace que accedan a él en cualquier momento y de manera desordenada, generando errores.  
+
+- ¿Cómo se puede corregir esta condición de carrera sin dejar de utilizar hilos? 
+La condición de carrera se puede corregir sin dejar de utilizar hilos implementando la exclusión mutua, para asegurar que si un hilo está usando la variable los demás se excluyan hasta que sea liberado. Podemos implementar la exclusión mutua usando el busy waiting , el algoritmo de Peterson o el hardware. 
+
+
+sumador-restador_SIN_race.py 
+
+- ¿Qué sucede con el valor final del acumulador? 
+Al aplicar el bloqueador de hilo el valor final de acumulador vuelve a ser siempre 0, sin excepciones.  
+
+- ¿Qué se puede notar con respecto al tiempo de ejecución? 
+Con respecto al tiempo de ejecución puedo notar que es demasiado rápido, casi instantáneo.  
